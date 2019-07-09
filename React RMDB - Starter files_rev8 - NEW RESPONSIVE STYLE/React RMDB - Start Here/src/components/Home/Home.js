@@ -48,7 +48,7 @@ class Home extends Component {
         if (this.state.searchTerm === '') {
             endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${this.state.currentPage + 1}`;
         } else {
-            endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query${this.state.searchTerm}&page=${this.state.currentPage + 1}`;
+            endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${this.state.searchTerm}&page=${this.state.currentPage + 1}`;
         }
         this.fetchItems(endpoint);
     }
@@ -88,15 +88,16 @@ class Home extends Component {
                             return <MovieThumb
                                     key={i}
                                     clickable={true}
-                                    image={element.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${element.poster_patch}` : './images/no_image.jpg'}
+                                    image={element.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${element.poster_path}` : './images/no_image.jpg'}
                                     movieId={element.id}
                                     movieName={element.original_title}
                                     />
                         })}
                         </FourColGrid>
+                        {this.state.loading ? <Spinner /> : null}
+                        {(this.state.currentPage <= this.state.totalPages && !this.state.loading) ?
+                            <LoadMoreBtn text='Load More' onClick={this.loadMoreItems} /> : null }
                 </div>
-                <Spinner />
-                <LoadMoreBtn />
             </div>
         )
     }
