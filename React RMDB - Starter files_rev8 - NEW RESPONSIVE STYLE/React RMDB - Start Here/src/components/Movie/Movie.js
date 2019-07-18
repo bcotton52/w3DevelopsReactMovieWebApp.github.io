@@ -54,9 +54,9 @@ class Movie extends Component {
             <div className='rmdb-movie'>
                 {this.state.movie ?
                 <div>
-                    <Navigation move={this.props.location.movieName} />
+                    <Navigation movie={this.props.location.movieName} />
                     <MovieInfo movie={this.state.movie} directors={this.state.directors} />
-                    <MovieInfoBar movie={this.state.movie.runtime} budget={this.state.movie.budget} revenue={this.state.movie.revenue} />
+                    <MovieInfoBar time={this.state.movie.runtime} budget={this.state.movie.budget} revenue={this.state.movie.revenue} />
                 </div>
             : null}
             {this.state.actors ? 
